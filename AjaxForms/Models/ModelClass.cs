@@ -5,13 +5,11 @@ namespace AjaxForms.Models
 {
      
 
-    public class ModelClass
+    public static class ModelClass
     {
-        public string username { get; set; }
-        public string password { get; set; }
+  
 
-
-        public string encryptString(string value)
+        public static  string encryptString(this string value)
         {
             byte[] b = Encoding.ASCII.GetBytes(value);
             string envalue = Convert.ToBase64String(b);
