@@ -91,7 +91,7 @@
             $.ajax({
                 type:"POST",
                 url: "form/form", //action/controler
-                data: "{'username':'"+$("[id$=txtName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
+                data: "{'name':'"+$("[id$=txtName]").val()+"','username':'"+$("[id$=txtName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(response) {
