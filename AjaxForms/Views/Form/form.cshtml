@@ -86,6 +86,22 @@
             valid = 1;
             return;
         }
+
+        if (valid ==0) {
+            $.ajax({
+                type:"POST",
+                url: "form/form", //action/controler
+                data: "{'username':'"+$("[id$=txtName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+
+                },
+                error: function(response) {
+                    alert(response.toString());
+                }
+            })
+        }
     })
 </script>
 
