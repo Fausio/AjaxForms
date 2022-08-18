@@ -3,6 +3,7 @@
 }
 
 <style>
+
     .form-card {
         background-color: aliceblue;
         padding: 40px;
@@ -14,16 +15,17 @@
     }
 
         .form-card h1 {
-            font-weight 100;
+            font-weight: 100;
             text-align: center;
             font-size: 2.3em;
+            text-transform:uppercase;
         }
 
         .form-card input[type=text], input[type=password] {
             height: 36px;
             font-size: 16px;
             width: 100%;
-            margin-bottom: auto;
+            margin-bottom: 10px;
             background: #ffffff;
             box-sizing: border-box;
             border: 1px solid #d9d9d9
@@ -39,14 +41,17 @@
             height: 36px;
             background-color: #4d90fe;
             border: 0px;
-            color: #ffffff
+            color: #ffffff;text-transform:uppercase;
         }
 </style>
 
-<h1>form</h1>
+
 <br />
 
 <div class="form-card">
+
+    <h1>form</h1>
+
     <input type="text" id="txtName" placeholder="Some place holders" autocomplete="off" />
     <input type="text" id="txtUserName" placeholder="Some place holders 2" autocomplete="off" />
     <input type="password" id="txtPassword" placeholder="Some place holders 3" autocomplete="off" />
