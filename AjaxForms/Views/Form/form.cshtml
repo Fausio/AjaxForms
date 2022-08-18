@@ -91,11 +91,15 @@
             $.ajax({
                 type:"POST",
                 url: "formsubmitajax/form", //action/controler
-                data: "{'name':'"+$("[id$=txtName]").val()+"','username':'"+$("[id$=txtName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
+                data: "{'name':'"+$("[id$=txtName]").val()+"','username':'"+$("[id$=txtUserName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(response) {
+                      alert(response[0].toString());
 
+                    $("[id$=txtName]").val("");
+                    $("[id$=txtUserName]").val("");
+                    $("[id$=txtPassword]").val("");
                 },
                 error: function(response) {
                     alert(response.toString());
