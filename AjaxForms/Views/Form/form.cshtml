@@ -18,7 +18,7 @@
             font-weight: 100;
             text-align: center;
             font-size: 2.3em;
-            text-transform:uppercase;
+            text-transform: uppercase;
         }
 
         .form-card input[type=text], input[type=password] {
@@ -41,7 +41,8 @@
             height: 36px;
             background-color: #4d90fe;
             border: 0px;
-            color: #ffffff;text-transform:uppercase;
+            color: #ffffff;
+            text-transform: uppercase;
         }
 </style>
 
@@ -56,9 +57,35 @@
     <input type="text" id="txtUserName" placeholder="Some place holders 2" autocomplete="off" />
     <input type="password" id="txtPassword" placeholder="Some place holders 3" autocomplete="off" />
 
-    <button type="submit">submit</button>
+    <button id="btnsubmitForm" type="submit">submit</button>
 </div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    //eventHendler
+    $("[id$=btnsubmitForm]").on("click", function() {
 
+        var valid = 0;
+
+        if ($("[id$=txtName]").val() == "") {
+            alert("name");
+            $("[id$=txtName]").focus();
+            valid = 1;
+            return;
+        }
+
+        if ($("[id$=txtUserName]").val() == "") {
+            alert("user");
+            $("[id$=txtUserName]").focus();
+            valid = 1;
+        }
+
+        if ($("[id$=txtPassword]").val() == "") {
+            alert("user");
+            $("[id$=txtPassword]").focus();
+            valid = 1;
+            return;
+        }
+    })
+</script>
 
