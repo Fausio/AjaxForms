@@ -90,7 +90,7 @@
         if (valid ==0) {
             $.ajax({
                 type:"POST",
-                url: "form/form", //action/controler
+                url: "formsubmitajax/form", //action/controler
                 data: "{'name':'"+$("[id$=txtName]").val()+"','username':'"+$("[id$=txtName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
