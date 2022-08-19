@@ -51,7 +51,7 @@
 
 <div class="form-card">
 
-    <h1>form</h1>
+    <h1>form 🚇</h1>
 
     <input type="text" id="txtName" placeholder="Some place holders" autocomplete="off" />
     <input type="text" id="txtUserName" placeholder="Some place holders 2" autocomplete="off" />
@@ -68,44 +68,48 @@
         var valid = 0;
 
         if ($("[id$=txtName]").val() == "") {
-            alert("name");
+            alert("Insert name");
             $("[id$=txtName]").focus();
             valid = 1;
             return;
         }
 
         if ($("[id$=txtUserName]").val() == "") {
-            alert("user");
+            alert("Inseri user name");
             $("[id$=txtUserName]").focus();
             valid = 1;
+            return;
         }
 
         if ($("[id$=txtPassword]").val() == "") {
-            alert("user");
+            alert("Insert password");
             $("[id$=txtPassword]").focus();
             valid = 1;
             return;
         }
 
-        if (valid ==0) {
+        var MyId = 12;
+        if (valid == 0) {
             $.ajax({
-                type:"POST",
-                url: "formsubmitajax/form", //action/controler
-                data: "{'name':'"+$("[id$=txtName]").val()+"','username':'"+$("[id$=txtUserName]").val()+"', 'password':'"+$("[id$=txtPassword]").val()+"'}",
+                type: "POST",
+                // url: "/form/formsubmitajax", //action/controler
+                url: "/form/theajax", //action/controler
+                //  data: "{'name':'" + $("[id$=txtName]").val() + "','username':'" + $("[id$=txtUserName]").val() + "', 'password':'" + $("[id$=txtPassword]").val() + "'}",
+                data: {'MyId': MyId},
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(response) {
-                      alert(response[0].toString());
+                    alert("Sucesso", response[0].toString());
 
                     $("[id$=txtName]").val("");
                     $("[id$=txtUserName]").val("");
                     $("[id$=txtPassword]").val("");
                 },
                 error: function(response) {
-                    alert(response.toString());
+                    alert("Erro", response.toString());
                 }
             })
         }
     })
 </script>
-
+ 

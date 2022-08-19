@@ -22,13 +22,22 @@ namespace AjaxForms.Controllers
         [HttpPost]
         public JsonResult formsubmitajax(string name, string username, string password)
         {
-             List<string> strings = new List<string>();
+            List<string> strings = new List<string>();
             SqlConnection connection = new SqlConnection(configuration.GetConnectionString("SQLServerConnection"));
 
             var query = $@"INSERT INTO [TABLE]([Name],[UserName],[Password])  VALUES ({name},{username},{ModelClass.encryptString(password)})";
             connection.Open();
             SqlCommand command = new SqlCommand(query, connection);
             command.ExecuteNonQuery();
+            strings.Add("Tuple Inserted.");
+            return Json(strings);
+        }
+
+        [HttpPost]
+        public JsonResult theajax(int MyId)
+        {
+            List<string> strings = new List<string>();
+
             strings.Add("Tuple Inserted.");
             return Json(strings);
         }
