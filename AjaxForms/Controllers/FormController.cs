@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using AjaxForms.Models;
+using System.Threading.Tasks;
 
 namespace AjaxForms.Controllers
 {
@@ -20,26 +21,29 @@ namespace AjaxForms.Controllers
         }
 
         [HttpPost]
-        public JsonResult formsubmitajax(string name, string username, string password)
+        public async Task<JsonResult> formsubmitajax([FromBody] ModelObject model)
         {
-            List<string> strings = new List<string>();
-            SqlConnection connection = new SqlConnection(configuration.GetConnectionString("SQLServerConnection"));
-
-            var query = $@"INSERT INTO [TABLE]([Name],[UserName],[Password])  VALUES ({name},{username},{ModelClass.encryptString(password)})";
-            connection.Open();
-            SqlCommand command = new SqlCommand(query, connection);
-            command.ExecuteNonQuery();
-            strings.Add("Tuple Inserted.");
-            return Json(strings);
+            await InsertIntoTable(model);
+            return Json("");
         }
 
-        [HttpPost]
-        public JsonResult theajax(int MyId)
-        {
-            List<string> strings = new List<string>();
 
-            strings.Add("Tuple Inserted.");
-            return Json(strings);
+        private async Task InsertIntoTable(ModelObject model)
+        {
+            try
+            {
+                SqlConnection connection = new SqlConnection(configuration.GetConnectionString("SQLServerConnection"));
+                var query = @"INSERT INTO [Table]([Name],[UserName],[Password])  VALUES ('" + model.Name + "','" + model.UserName + "', '" + ModelClass.encryptString(model.Password) + "' )";
+                await connection.OpenAsync();
+                SqlCommand command = new SqlCommand(query, connection);
+                await command.ExecuteNonQueryAsync();
+
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
