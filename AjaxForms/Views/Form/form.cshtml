@@ -65,51 +65,62 @@
     //eventHendler
     $("[id$=btnsubmitForm]").on("click", function() {
 
-        var valid = 0;
+     
+     var valid = 0;
+     var data = { 
+            Name:     $("[id$=txtName]").val(), 
+            UserName: $("[id$=txtUserName]").val(), 
+            Password: $("[id$=txtPassword]").val(), 
+          };
 
-        if ($("[id$=txtName]").val() == "") {
+       
+
+        if (data.Name == "") {
             alert("Insert name");
             $("[id$=txtName]").focus();
             valid = 1;
             return;
         }
 
-        if ($("[id$=txtUserName]").val() == "") {
+        if (data.UserName == "") {
             alert("Inseri user name");
             $("[id$=txtUserName]").focus();
             valid = 1;
             return;
         }
 
-        if ($("[id$=txtPassword]").val() == "") {
+        if (data.Password == "") {
             alert("Insert password");
             $("[id$=txtPassword]").focus();
             valid = 1;
             return;
         }
 
-        var MyId = 12;
-        if (valid == 0) {
-            $.ajax({
-                type: "POST",
-                // url: "/form/formsubmitajax", //action/controler
-                url: "/form/theajax", //action/controler
-                //  data: "{'name':'" + $("[id$=txtName]").val() + "','username':'" + $("[id$=txtUserName]").val() + "', 'password':'" + $("[id$=txtPassword]").val() + "'}",
-                data: {'MyId': MyId},
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function(response) {
-                    alert("Sucesso", response[0].toString());
+
+
+       var getWorkflowDetailsUrl = "/form/formsubmitajax";
+     
+         if(valid == 0){
+              $.ajax({
+                    type: "POST",
+                    url: getWorkflowDetailsUrl,
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                      
+                    alert("Sucesso");
 
                     $("[id$=txtName]").val("");
                     $("[id$=txtUserName]").val("");
                     $("[id$=txtPassword]").val("");
-                },
-                error: function(response) {
-                    alert("Erro", response.toString());
-                }
-            })
-        }
+
+                    },
+                    error: function (response) {
+                      alert("Erro", response.toString());
+                    }
+                    });
+         }
     })
 </script>
  
