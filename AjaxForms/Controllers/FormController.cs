@@ -23,8 +23,18 @@ namespace AjaxForms.Controllers
         [HttpPost]
         public async Task<JsonResult> formsubmitajax([FromBody] ModelObject model)
         {
-            await InsertIntoTable(model);
-            return Json("");
+            try
+            {
+                await InsertIntoTable(model);
+                return Json("");
+
+            }
+            catch (System.Exception ex)
+            {
+                return Json(ex.InnerException);
+                throw ex;
+            }
+  
         }
 
 
