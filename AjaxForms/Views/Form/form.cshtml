@@ -47,11 +47,43 @@
 </style>
 
 
-<br />
 
+
+
+
+<!-- jquery validation -->
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">form 🚇 <small>Ajax</small></h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form id="quickForm">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="InputName">Name</label>
+                <input type="text" name="name" class="form-control" id="InputName" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="InputUserName">User name</label>
+                <input type="text" name="userName" class="form-control" id="InputUserName" placeholder="Enter user name">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Password</label>
+                <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Enter password">
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button id="btnsubmitForm" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+@*
 <div class="form-card">
 
-    <h1>form 🚇</h1>
+    <h1></h1>
 
     <input type="text" id="txtName" placeholder="Some place holders" autocomplete="off" />
     <input type="text" id="txtUserName" placeholder="Some place holders 2" autocomplete="off" />
@@ -59,39 +91,119 @@
 
     <button id="btnsubmitForm" type="submit">submit</button>
 </div>
+*@
+<!-- jQuery -->
+<script src="~/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<!-- Page specific script -->
 <script>
+    $(function() {
+        $.validator.setDefaults({
+            submitHandler: function() {
+                var data = {
+                    Name: $("[id$=InputName]").val(),
+                    UserName: $("[id$=InputUserName]").val(),
+                    Password: $("[id$=InputPassword]").val(),
+                };
+
+                var getWorkflowDetailsUrl = "/form/formsubmitajax";
+
+
+                $.ajax({
+                    type: "POST",
+                    url: getWorkflowDetailsUrl,
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+
+                        alert("Sucesso");
+
+                        $("[id$=InputName]").val("");
+                        $("[id$=InputUserName]").val("");
+                        $("[id$=InputPassword]").val("");
+
+                    },
+                    error: function(response) {
+                        alert("Erro", response.toString());
+                    }
+                });
+
+            }
+        });
+
+        $('#quickForm').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                userName: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 2
+                },
+            },
+            messages: {
+                name: {
+                    required: "Please enter a name"
+                },
+                userName: {
+                    required: "Please enter a user nane"
+                },
+                password: {
+                    required: "Please provide a password",
+                    minlength: "Your password must be at least 2 characters long"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
+
+
+@*<script>
     //eventHendler
     $("[id$=btnsubmitForm]").on("click", function() {
 
-     
+
      var valid = 0;
-     var data = { 
-            Name:     $("[id$=txtName]").val(), 
-            UserName: $("[id$=txtUserName]").val(), 
-            Password: $("[id$=txtPassword]").val(), 
+     var data = {
+            Name:     $("[id$=InputName]").val(),
+            UserName: $("[id$=InputUserName]").val(),
+            Password: $("[id$=InputPassword]").val(),
           };
 
-       
+
 
         if (data.Name == "") {
             alert("Insert name");
-            $("[id$=txtName]").focus();
+            $("[id$=InputName]").focus();
             valid = 1;
             return;
         }
 
         if (data.UserName == "") {
             alert("Inseri user name");
-            $("[id$=txtUserName]").focus();
+            $("[id$=InputUserName]").focus();
             valid = 1;
             return;
         }
 
         if (data.Password == "") {
             alert("Insert password");
-            $("[id$=txtPassword]").focus();
+            $("[id$=InputPassword]").focus();
             valid = 1;
             return;
         }
@@ -99,7 +211,7 @@
 
 
        var getWorkflowDetailsUrl = "/form/formsubmitajax";
-     
+
          if(valid == 0){
               $.ajax({
                     type: "POST",
@@ -108,7 +220,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                      
+
                     alert("Sucesso");
 
                     $("[id$=txtName]").val("");
@@ -122,5 +234,9 @@
                     });
          }
     })
+
+
+
+
 </script>
- 
+*@
