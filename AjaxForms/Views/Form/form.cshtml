@@ -2,53 +2,6 @@
     ViewData["Title"] = "form";
 }
 
-<style>
-
-    .form-card {
-        background-color: aliceblue;
-        padding: 40px;
-        width: 300px;
-        margin: 0 auto 10px;
-        border-radius: 5px;
-        box-shadow: 0px 2px 2px rgba(0,0,0,0.3);
-        overflow: hidden;
-    }
-
-        .form-card h1 {
-            font-weight: 100;
-            text-align: center;
-            font-size: 2.3em;
-            text-transform: uppercase;
-        }
-
-        .form-card input[type=text], input[type=password] {
-            height: 36px;
-            font-size: 16px;
-            width: 100%;
-            margin-bottom: 10px;
-            background: #ffffff;
-            box-sizing: border-box;
-            border: 1px solid #d9d9d9
-        }
-
-        .form-card button[type=submit] {
-            width: 100%;
-            display: block;
-            margin-bottom: 10px;
-            position: relative;
-            font-size: 14px;
-            font-weight: 700;
-            height: 36px;
-            background-color: #4d90fe;
-            border: 0px;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-</style>
-
-
-
-
 
 
 <!-- jquery validation -->
@@ -80,18 +33,165 @@
         </div>
     </form>
 </div>
-@*
-<div class="form-card">
+ 
 
-    <h1></h1>
+ <!-- Toastr -->
+  @*<script src="~/AdminLTE-3.2.0/plugins/toastr/toastr.min.js"></script>*@
+   <script src="~/AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
+   <script>
+    $(function () {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      });
 
-    <input type="text" id="txtName" placeholder="Some place holders" autocomplete="off" />
-    <input type="text" id="txtUserName" placeholder="Some place holders 2" autocomplete="off" />
-    <input type="password" id="txtPassword" placeholder="Some place holders 3" autocomplete="off" />
+      $('.swalDefaultSuccess').click(function () {
+        Toast.fire({
+          icon: 'success',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultInfo').click(function () {
+        Toast.fire({
+          icon: 'info',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultError').click(function () {
+        Toast.fire({
+          icon: 'error',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultWarning').click(function () {
+        Toast.fire({
+          icon: 'warning',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultQuestion').click(function () {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
 
-    <button id="btnsubmitForm" type="submit">submit</button>
-</div>
-*@
+      $('.toastrDefaultSuccess').click(function () {
+        toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultInfo').click(function () {
+        toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultError').click(function () {
+        toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+      $('.toastrDefaultWarning').click(function () {
+        toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+      });
+
+      $('.toastsDefaultDefault').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultTopLeft').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'topLeft',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultBottomRight').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'bottomRight',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultBottomLeft').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          position: 'bottomLeft',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultAutohide').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          autohide: true,
+          delay: 750,
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultNotFixed').click(function () {
+        $(document).Toasts('create', {
+          title: 'Toast Title',
+          fixed: false,
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultFull').click(function () {
+        $(document).Toasts('create', {
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          icon: 'fas fa-envelope fa-lg',
+        })
+      });
+      $('.toastsDefaultFullImage').click(function () {
+        $(document).Toasts('create', {
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          image: '../../dist/img/user3-128x128.jpg',
+          imageAlt: 'User Picture',
+        })
+      });
+      $('.toastsDefaultSuccess').click(function () {
+        $(document).Toasts('create', {
+          class: 'bg-success',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultInfo').click(function () {
+        $(document).Toasts('create', {
+          class: 'bg-info',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultWarning').click(function () {
+        $(document).Toasts('create', {
+          class: 'bg-warning',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultDanger').click(function () {
+        $(document).Toasts('create', {
+          class: 'bg-danger',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.toastsDefaultMaroon').click(function () {
+        $(document).Toasts('create', {
+          class: 'bg-maroon',
+          title: 'Toast Title',
+          subtitle: 'Subtitle',
+          body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
 <!-- jQuery -->
 <script src="~/AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
 
